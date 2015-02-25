@@ -60,8 +60,7 @@ public class SearchActivity extends ActionBarActivity {
                     @Override
                     public void failure(RetrofitError error) {
                         Toast.makeText(getApplicationContext(), "failure", Toast.LENGTH_SHORT).show();
-                        Log.e("tag", "noooo", error);
-                        Log.i("tag", error.getUrl());
+                        Log.e("API", "request failure", error);
                     }
                 });
     }

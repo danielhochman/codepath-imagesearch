@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class EditFilterDialog extends DialogFragment {
     private EditText mEditText;
@@ -23,9 +25,16 @@ public class EditFilterDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_edit_filter, container);
+
+        Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
+                R.array.imgtype, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
 //        mEditText = (EditText) view.findViewById(R.id.txt_your_name);
-        String title = getArguments().getString("title", "Enter Name");
-        getDialog().setTitle(title);
+//        String title = getArguments().getString("title", "Enter Name");
+//        getDialog().setTitle(title);
 //        // Show soft keyboard automatically
 //        mEditText.requestFocus();
         getDialog().getWindow().setSoftInputMode(

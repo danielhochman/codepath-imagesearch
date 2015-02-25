@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="imgsz">
+        <item>icon</item>
+        <item>medium</item>
+        <item>xxlarge</item>
+        <item>huge</item>
+    </string-array>
+    
+    <string-array name="imgtype">
+        <item>face</item>
+        <item>photo</item>
+        <item>clipart</item>
+        <item>lineart</item>
+    </string-array>
+</resources>
