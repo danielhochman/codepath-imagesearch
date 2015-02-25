@@ -5,9 +5,17 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.runops.imagesearch.api.GoogleImageSearchApi;
+import com.runops.imagesearch.model.ResponseData;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 public class SearchActivity extends ActionBarActivity {
@@ -29,7 +37,7 @@ public class SearchActivity extends ActionBarActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+                searchGoogleImages(s);
                 return true;
             }
 
@@ -39,6 +47,23 @@ public class SearchActivity extends ActionBarActivity {
             }
         });
         return true;
+    }
+
+    public void searchGoogleImages(String query) {
+        GoogleImageSearchApi.getGoogleImageSearchApiClient().getResults(
+                query, new Callback<ResponseData>() {
+                    @Override
+                    public void success(ResponseData responseData, Response response) {
+                        Toast.makeText(getApplicationContext(), "success!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Toast.makeText(getApplicationContext(), "failure", Toast.LENGTH_SHORT).show();
+                        Log.e("tag", "noooo", error);
+                        Log.i("tag", error.getUrl());
+                    }
+                });
     }
 
     @Override
