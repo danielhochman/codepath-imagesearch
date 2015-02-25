@@ -1,5 +1,6 @@
 package com.runops.imagesearch;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ public class SearchActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_search, menu);
 
-        MenuItem searchItem = menu.findItem(R.id.actionSearch);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -46,6 +47,12 @@ public class SearchActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        if (id == R.id.action_filter) {
+            FragmentManager fm = getSupportFragmentManager();
+            EditFilterDialog editFilterDialog = EditFilterDialog.newInstance(getString(R.string.title_filter));
+            editFilterDialog.show(fm, "fragment_edit_filter");
+        }
 
         return super.onOptionsItemSelected(item);
     }
