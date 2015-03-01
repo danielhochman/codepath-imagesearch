@@ -26,19 +26,17 @@ public class EditFilterDialog extends DialogFragment {
 
         View view = inflater.inflate(R.layout.fragment_edit_filter, container);
 
+        // Set title
+        String title = getArguments().getString("title", getString(R.string.title_filter));
+        getDialog().setTitle(title);
+
+        // Hydrate spinners
         Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
                 R.array.imgtype, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-//        mEditText = (EditText) view.findViewById(R.id.txt_your_name);
-//        String title = getArguments().getString("title", "Enter Name");
-//        getDialog().setTitle(title);
-//        // Show soft keyboard automatically
-//        mEditText.requestFocus();
-        getDialog().getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         return view;
 
     }

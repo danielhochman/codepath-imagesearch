@@ -8,10 +8,17 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.Toast;
 
+import com.etsy.android.grid.StaggeredGridView;
+import com.runops.imagesearch.adapter.ResultArrayAdapter;
 import com.runops.imagesearch.api.GoogleImageSearchApi;
 import com.runops.imagesearch.model.ResponseData;
+import com.runops.imagesearch.model.Result;
+
+import java.util.ArrayList;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -20,10 +27,19 @@ import retrofit.client.Response;
 
 public class SearchActivity extends ActionBarActivity {
 
+    private ArrayList<Result> items;
+    private ResultArrayAdapter resultArrayAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        items = new ArrayList<Result>();
+        resultArrayAdapter = new ResultArrayAdapter(this, items);
+
+        StaggeredGridView gridView = (StaggeredGridView) findViewById(R.id.grid_view);
+        gridView.setAdapter(resultArrayAdapter);
     }
 
 
@@ -54,6 +70,10 @@ public class SearchActivity extends ActionBarActivity {
                 query, new Callback<ResponseData>() {
                     @Override
                     public void success(ResponseData responseData, Response response) {
+                        items.clear();
+                        items.addAll(responseData.responseData.results);
+                        resultArrayAdapter.notifyDataSetChanged();
+
                         Toast.makeText(getApplicationContext(), "success!", Toast.LENGTH_SHORT).show();
                     }
 
@@ -74,7 +94,7 @@ public class SearchActivity extends ActionBarActivity {
 
         if (id == R.id.action_filter) {
             FragmentManager fm = getSupportFragmentManager();
-            EditFilterDialog editFilterDialog = EditFilterDialog.newInstance(getString(R.string.title_filter));
+            EditFilterDialog editFilterDialog = EditFilterDialog.newInstance(null);
             editFilterDialog.show(fm, "fragment_edit_filter");
         }
 

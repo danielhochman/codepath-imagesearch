@@ -19,6 +19,7 @@ public class GoogleImageSearchApi {
                         @Override
                         public void intercept(RequestFacade request) {
                             request.addQueryParam("v", "1.0");
+                            request.addQueryParam("rsz", "8");
                         }
                     })
                     .build();

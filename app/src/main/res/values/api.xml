@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- For human readable names, consider http://stackoverflow.com/questions/3013655/creating-hashmap-map-from-xml-resources-->
     <string-array name="imgsz">
         <item>icon</item>
         <item>medium</item>
