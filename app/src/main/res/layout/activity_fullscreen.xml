@@ -5,9 +5,9 @@
     tools:context="com.runops.imagesearch.FullscreenActivity">
 
 
-    <com.runops.imagesearch.TouchImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <it.sephiroth.android.library.imagezoom.ImageViewTouch
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/ivFullscreen"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
