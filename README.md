@@ -4,9 +4,7 @@ This is an Android demo application for displaying photos from Google Image Sear
 
 **Time spent**: 12+ hours
 
-**Walkthrough**:
-
-![Video Walkthrough](http://giant.gfycat.com/BasicFixedAztecant.gif)
+**Walkthrough**: [.gifv](http://i.imgur.com/DZrwWYJ.gifv)
 
 **Completed user stories**:
  - *Required:* User can enter a search query that will display a grid of image results
