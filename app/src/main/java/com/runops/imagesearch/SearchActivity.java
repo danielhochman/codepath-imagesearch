@@ -1,5 +1,6 @@
 package com.runops.imagesearch;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -8,6 +9,8 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.Toast;
@@ -56,6 +59,16 @@ public class SearchActivity extends ActionBarActivity implements EditFilterDialo
             }
         });
         gridView.setAdapter(resultArrayAdapter);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Result item = items.get(position);
+
+                Intent i = new Intent(SearchActivity.this, FullscreenActivity.class);
+                i.putExtra("image_url", item.url);
+                startActivity(i);
+            }
+        });
     }
 
 
