@@ -35,6 +35,11 @@ public class GoogleImageSearchApi {
         @GET("/images")
         void getResults(
                 @Query("q") String query,
+                @Query("start") Integer start,
+                @Query("imgsz") String size,
+                @Query("imgcolor") String color,
+                @Query("imgtype") String type,
+                @Query("as_sitesearch") String site,
                 Callback<ResponseData> callback
         );
     }

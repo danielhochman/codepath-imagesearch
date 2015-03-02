@@ -1,18 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/textView" />
+        android:text="@string/label_imgsz"
+        android:layout_alignTop="@+id/spinner_imgsz"
+        android:layout_alignBottom="@+id/spinner_imgsz"
+        android:gravity="center"
+        android:layout_marginRight="5dp"
+        android:id="@+id/tvImgsz" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
-        android:layout_toRightOf="@id/textView" />
+        android:id="@+id/spinner_imgsz"
+        android:layout_toRightOf="@+id/tvImgsz" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/label_colorfilter"
+        android:layout_alignTop="@+id/spinner_colorfilter"
+        android:layout_alignBottom="@+id/spinner_colorfilter"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:id="@+id/tvColorfilter" />
+
+    <Spinner
+        android:layout_below="@+id/spinner_imgsz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_colorfilter"
+        android:layout_toRightOf="@+id/tvColorfilter" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/label_imgtype"
+        android:layout_alignTop="@+id/spinner_imgtype"
+        android:layout_alignBottom="@+id/spinner_imgtype"
+        android:gravity="center"
+        android:layout_marginRight="5dp"
+        android:id="@+id/tvFace" />
+
+    <Spinner
+        android:layout_below="@id/spinner_colorfilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_imgtype"
+        android:layout_toRightOf="@+id/tvFace" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/label_sitefilter"
+        android:layout_alignTop="@+id/etSitefilter"
+        android:layout_alignBottom="@+id/etSitefilter"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="5dp"
+        android:id="@+id/tvSitefilter"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etSitefilter"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/spinner_imgtype"
+        android:layout_toRightOf="@id/tvSitefilter"
+        android:layout_alignLeft="@id/spinner_imgtype"
+        android:layout_alignRight="@id/spinner_imgtype"
+        />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_apply"
+        android:id="@+id/btnApply"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/tvSitefilter"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_cancel"
+        android:layout_margin="10dp"
+        android:id="@+id/btnCancel"
+        android:layout_below="@+id/etSitefilter"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        />
+
+
 </RelativeLayout>

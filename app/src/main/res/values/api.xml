@@ -1,17 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- For human readable names, consider http://stackoverflow.com/questions/3013655/creating-hashmap-map-from-xml-resources-->
-    <string-array name="imgsz">
+
+    <string name="label_imgsz">Image Size</string>
+    <string-array name="array_imgsz">
         <item>icon</item>
         <item>medium</item>
         <item>xxlarge</item>
         <item>huge</item>
     </string-array>
-    
-    <string-array name="imgtype">
+
+    <string name="label_imgtype">Image Type</string>
+    <string-array name="array_imgtype">
         <item>face</item>
         <item>photo</item>
         <item>clipart</item>
         <item>lineart</item>
     </string-array>
+
+    <string name="label_colorfilter">Color Filter</string>
+    <string-array name="array_colorfilter">
+        <item>black</item>
+        <item>blue</item>
+        <item>brown</item>
+        <item>gray</item>
+        <item>green</item>
+        <item>orange</item>
+        <item>pink</item>
+        <item>purple</item>
+        <item>red</item>
+        <item>teal</item>
+        <item>white</item>
+        <item>yellow</item>
+    </string-array>
+
+    <string name="label_sitefilter">Site Filter</string>
+
+    <string name="btn_apply">Apply</string>
+    <string name="btn_cancel">Cancel</string>
+
 </resources>
