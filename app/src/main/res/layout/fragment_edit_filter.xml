@@ -13,7 +13,9 @@
         android:layout_alignBottom="@+id/spinner_imgsz"
         android:gravity="center"
         android:layout_marginRight="5dp"
-        android:id="@+id/tvImgsz" />
+        android:id="@+id/tvImgsz"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Spinner
         android:layout_width="match_parent"
@@ -29,8 +31,12 @@
         android:layout_alignTop="@+id/spinner_colorfilter"
         android:layout_alignBottom="@+id/spinner_colorfilter"
         android:gravity="center"
-        android:layout_margin="5dp"
-        android:id="@+id/tvColorfilter" />
+        android:id="@+id/tvColorfilter"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toLeftOf="@+id/spinner_imgsz"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Spinner
         android:layout_below="@+id/spinner_imgsz"
@@ -47,8 +53,9 @@
         android:layout_alignTop="@+id/spinner_imgtype"
         android:layout_alignBottom="@+id/spinner_imgtype"
         android:gravity="center"
-        android:layout_marginRight="5dp"
-        android:id="@+id/tvFace" />
+        android:id="@+id/tvFace"
+        android:layout_toLeftOf="@+id/spinner_imgsz"
+        android:layout_toStartOf="@+id/spinner_imgsz" />
 
     <Spinner
         android:layout_below="@id/spinner_colorfilter"
@@ -67,9 +74,11 @@
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="5dp"
         android:id="@+id/tvSitefilter"
-        />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/spinner_imgtype"
+        android:layout_toStartOf="@+id/spinner_imgtype" />
 
     <EditText
         android:layout_width="match_parent"

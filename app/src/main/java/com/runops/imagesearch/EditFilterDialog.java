@@ -94,8 +94,8 @@ public class EditFilterDialog extends DialogFragment implements DialogInterface.
         ArrayList<CharSequence> items = new ArrayList<CharSequence>(Arrays.asList(this.getResources().getTextArray(arrayResId)));
         // Add a default empty item
         items.add(0, "");
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, items);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(getActivity().getApplicationContext(), R.layout.spinner_dropdown_item, items);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
 
