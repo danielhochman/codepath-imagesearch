@@ -1,6 +1,9 @@
 package com.runops.imagesearch;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -106,25 +109,30 @@ public class SearchActivity extends ActionBarActivity implements EditFilterDialo
     }
 
     public void searchGoogleImages(Integer start) {
-        GoogleImageSearchApi.getGoogleImageSearchApiClient().getResults(
-                lastQueryString, start, myPreferences.size, myPreferences.color, myPreferences.type, myPreferences.site,
-                new Callback<ResponseData>() {
-                    @Override
-                    public void success(ResponseData responseData, Response response) {
-                        Log.i(this.getClass().toString(), "Fetched " + response.getUrl());
-                        if (responseData != null && responseData.responseData != null && responseData.responseData.results != null) {
-                            items.addAll(responseData.responseData.results);
-                            resultArrayAdapter.notifyDataSetChanged();
-                        }
-                    }
 
-                    @Override
-                    public void failure(RetrofitError error) {
-                        resultArrayAdapter.notifyDataSetChanged();
-                        Toast.makeText(getApplicationContext(), "failure", Toast.LENGTH_SHORT).show();
-                        Log.e("API", "request failure", error);
-                    }
-                });
+        if (isNetworkAvailable()) {
+            GoogleImageSearchApi.getGoogleImageSearchApiClient().getResults(
+                    lastQueryString, start, myPreferences.size, myPreferences.color, myPreferences.type, myPreferences.site,
+                    new Callback<ResponseData>() {
+                        @Override
+                        public void success(ResponseData responseData, Response response) {
+                            Log.i(this.getClass().toString(), "Fetched " + response.getUrl());
+                            if (responseData != null && responseData.responseData != null && responseData.responseData.results != null) {
+                                items.addAll(responseData.responseData.results);
+                                resultArrayAdapter.notifyDataSetChanged();
+                            }
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            resultArrayAdapter.notifyDataSetChanged();
+                            Toast.makeText(getApplicationContext(), "Request failure!", Toast.LENGTH_SHORT).show();
+                            Log.e("API", "Request failure!", error);
+                        }
+                    });
+        } else {
+            Toast.makeText(getApplicationContext(), "Network unavailable!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -154,5 +162,12 @@ public class SearchActivity extends ActionBarActivity implements EditFilterDialo
             searchGoogleImages(0);
         }
 
+    }
+
+    private Boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 }

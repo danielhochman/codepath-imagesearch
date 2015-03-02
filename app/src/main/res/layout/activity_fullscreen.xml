@@ -5,7 +5,7 @@
     tools:context="com.runops.imagesearch.FullscreenActivity">
 
 
-    <ImageView
+    <com.runops.imagesearch.TouchImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ivFullscreen"
