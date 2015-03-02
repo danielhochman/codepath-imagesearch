@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.runops.imagesearch.model.Result;
 import com.squareup.picasso.Callback;
@@ -44,6 +45,7 @@ public class FullscreenActivity extends ActionBarActivity {
 
         Picasso.with(getApplicationContext())
                 .load(result.url).fit().centerInside()
+                .error(R.drawable.ic_error)
                 .into(ivFullscreen, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -54,6 +56,7 @@ public class FullscreenActivity extends ActionBarActivity {
                     @Override
                     public void onError() {
                         progressBar.setVisibility(View.GONE);
+                        Toast.makeText(getApplicationContext(), "Error loading image", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

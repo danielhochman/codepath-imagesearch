@@ -170,7 +170,10 @@ public class SearchActivity extends ActionBarActivity implements EditFilterDialo
 
             items.clear();
             resultArrayAdapter.notifyDataSetChanged();
-            searchGoogleImages(0);
+            if (lastQueryString != null && !lastQueryString.trim().equals("")) {
+                progressBar.setVisibility(View.VISIBLE);
+                searchGoogleImages(0);
+            }
         }
 
     }
