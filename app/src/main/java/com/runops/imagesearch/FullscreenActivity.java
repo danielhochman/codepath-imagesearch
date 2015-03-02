@@ -12,8 +12,11 @@ import android.os.Bundle;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
+import com.runops.imagesearch.model.Result;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -32,20 +35,25 @@ public class FullscreenActivity extends ActionBarActivity {
         setContentView(R.layout.activity_fullscreen);
 
         ImageView ivFullscreen = (ImageView) findViewById(R.id.ivFullscreen);
+        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBarSearch);
+        progressBar.setVisibility(View.VISIBLE);
 
-        getSupportActionBar().setTitle("");
+        Result result = (Result) getIntent().getSerializableExtra("result");
+
+        getSupportActionBar().setTitle(result.contentNoFormatting);
 
         Picasso.with(getApplicationContext())
-                .load(getIntent().getStringExtra("image_url"))
+                .load(result.url).fit().centerInside()
                 .into(ivFullscreen, new Callback() {
                     @Override
                     public void onSuccess() {
                         setupShareIntent();
+                        progressBar.setVisibility(View.GONE);
                     }
 
                     @Override
                     public void onError() {
-
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
     }

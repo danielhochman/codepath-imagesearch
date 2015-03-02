@@ -1,6 +1,9 @@
 package com.runops.imagesearch.model;
 
-public class Result {
+import java.io.Serializable;
+
+public class Result implements Serializable {
     public String tbUrl;
     public String url;
+    public String contentNoFormatting;
 }

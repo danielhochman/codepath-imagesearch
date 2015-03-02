@@ -13,9 +13,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.etsy.android.grid.StaggeredGridView;
@@ -26,7 +26,6 @@ import com.runops.imagesearch.model.MyPreferences;
 import com.runops.imagesearch.model.ResponseData;
 import com.runops.imagesearch.model.Result;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import retrofit.Callback;
@@ -39,6 +38,7 @@ public class SearchActivity extends ActionBarActivity implements EditFilterDialo
     private ArrayList<Result> items;
     private ResultArrayAdapter resultArrayAdapter;
     private StaggeredGridView gridView;
+    private ProgressBar progressBar;
 
     private String lastQueryString;
 
@@ -54,6 +54,9 @@ public class SearchActivity extends ActionBarActivity implements EditFilterDialo
         items = new ArrayList<Result>();
         resultArrayAdapter = new ResultArrayAdapter(this, items);
 
+        progressBar = (ProgressBar) findViewById(R.id.progressBarSearch);
+
+
         gridView = (StaggeredGridView) findViewById(R.id.grid_view);
         gridView.setOnScrollListener(new EndlessScrollListener() {
             @Override
@@ -68,7 +71,7 @@ public class SearchActivity extends ActionBarActivity implements EditFilterDialo
                 Result item = items.get(position);
 
                 Intent i = new Intent(SearchActivity.this, FullscreenActivity.class);
-                i.putExtra("image_url", item.url);
+                i.putExtra("result", item);
                 startActivity(i);
             }
         });
@@ -81,11 +84,15 @@ public class SearchActivity extends ActionBarActivity implements EditFilterDialo
         getMenuInflater().inflate(R.menu.menu_search, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
                 if (!s.equals(lastQueryString)) {
+                    progressBar.setVisibility(View.VISIBLE);
+
                     // update cached query
                     lastQueryString = s;
 
@@ -95,6 +102,7 @@ public class SearchActivity extends ActionBarActivity implements EditFilterDialo
 
                     // search!
                     searchGoogleImages(0);
+
                 }
 
                 return true;
@@ -121,6 +129,8 @@ public class SearchActivity extends ActionBarActivity implements EditFilterDialo
                                 items.addAll(responseData.responseData.results);
                                 resultArrayAdapter.notifyDataSetChanged();
                             }
+                            progressBar.setVisibility(View.GONE);
+
                         }
 
                         @Override
@@ -128,6 +138,7 @@ public class SearchActivity extends ActionBarActivity implements EditFilterDialo
                             resultArrayAdapter.notifyDataSetChanged();
                             Toast.makeText(getApplicationContext(), "Request failure!", Toast.LENGTH_SHORT).show();
                             Log.e("API", "Request failure!", error);
+                            progressBar.setVisibility(View.GONE);
                         }
                     });
         } else {
